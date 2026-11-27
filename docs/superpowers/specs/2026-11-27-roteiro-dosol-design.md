@@ -77,7 +77,9 @@ Caminhos relativos, para funcionar no GitHub Pages em subdiretório.
 | `sw.js` | Uso sem sinal |
 
 A imagem é desenhada direto no canvas (sem biblioteca), depois que as fontes carregam.
-Compartilha pela Web Share API; sem suporte, baixa o arquivo. A imagem também aparece na tela
+Cada imagem tem o botão "Compartilhar no Instagram", que a envia sozinha ao menu do aparelho
+pela Web Share API (um site não publica direto nos stories); sem suporte, baixa o arquivo e
+orienta postar pela galeria. A imagem também aparece na tela
 para salvar com toque longo (navegadores internos como o do Instagram).
 
 O service worker busca primeiro na rede e usa o cache só sem conexão, para não prender

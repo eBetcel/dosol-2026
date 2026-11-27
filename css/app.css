@@ -40,9 +40,11 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 .vazio { text-align: center; padding: 32px 16px; }
 
 .acoes { display: flex; gap: 8px; margin: 16px 0; }
-.acoes button { flex: 1; min-height: 48px; font-weight: 800; background: var(--vermelho); border: 2px solid var(--preto); border-radius: 8px; }
+.acoes button, #preview button { flex: 1; min-height: 48px; font-weight: 800; background: var(--vermelho); border: 2px solid var(--preto); border-radius: 8px; }
 .acoes button:disabled { opacity: .45; cursor: default; }
 #preview { display: grid; gap: 12px; justify-items: center; text-align: center; }
+#preview figure { display: grid; gap: 8px; justify-items: center; width: 100%; max-width: 360px; }
+#preview button { width: 100%; }
 #preview img { width: 100%; max-width: 360px; height: auto; border: 2px solid var(--preto); }
 
 footer { text-align: center; padding: 20px 16px; font-size: .8rem; }

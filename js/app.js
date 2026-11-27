@@ -2,7 +2,7 @@ import { DAYS } from './data.js';
 import { showsOfDay, defaultDayId, findConflicts } from './schedule.js';
 import { createSelection } from './storage.js';
 import { renderTimeline, renderPlan } from './ui.js';
-import { paginate, drawPage, shareOrDownload } from './export-image.js';
+import { paginate, drawPage, shareOrDownload, shareHint } from './export-image.js';
 
 const $ = selector => document.querySelector(selector);
 const validIds = new Set(DAYS.flatMap(d => showsOfDay(d).map(s => s.id)));
@@ -30,13 +30,9 @@ function render() {
   renderSelectionState();
 }
 
-let files = [];
-
 function clearImages() {
   for (const img of $('#preview').querySelectorAll('img')) URL.revokeObjectURL(img.src);
   $('#preview').replaceChildren();
-  $('#share').hidden = true;
-  files = [];
 }
 
 async function createImages() {
@@ -61,21 +57,32 @@ function download(file) {
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
 
+function imageCard(file) {
+  const img = Object.assign(document.createElement('img'), { src: URL.createObjectURL(file), alt: 'Imagem do seu roteiro' });
+  const button = Object.assign(document.createElement('button'), { type: 'button', textContent: 'Compartilhar no Instagram' });
+  const hint = document.createElement('p');
+  // share precisa ser chamado direto no toque (iOS); uma imagem por vez para os stories
+  button.addEventListener('click', async () => {
+    hint.textContent = shareHint(await shareOrDownload([file], navigator, download));
+  });
+  const card = document.createElement('figure');
+  card.append(img, button, hint);
+  return card;
+}
+
 $('#export').addEventListener('click', async () => {
   clearImages();
   $('#export').disabled = true;
   try {
-    files = await createImages();
+    const files = await createImages();
     $('#preview').append(
-      Object.assign(document.createElement('p'), { textContent: 'Segure na imagem para salvar' }),
-      ...files.map(file => Object.assign(document.createElement('img'), { src: URL.createObjectURL(file), alt: 'Imagem do seu roteiro' })));
-    $('#share').hidden = false;
+      Object.assign(document.createElement('p'), { textContent: 'No menu que abrir, escolha Instagram → Stories. Ou segure na imagem para salvar.' }),
+      ...files.map(imageCard));
   } catch {
     $('#preview').textContent = 'Não foi possível gerar a imagem neste navegador.';
   }
   $('#export').disabled = selection.ids().length === 0;
 });
-$('#share').addEventListener('click', () => shareOrDownload(files, navigator, download));
 
 for (const d of DAYS) {
   const button = Object.assign(document.createElement('button'), { type: 'button', textContent: d.label });

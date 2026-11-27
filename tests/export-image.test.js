@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { paginate, wrapText, shareOrDownload } from '../js/export-image.js';
+import { paginate, wrapText, shareOrDownload, shareHint } from '../js/export-image.js';
 
 test('pagina em blocos de 14', () => {
   assert.deepEqual(paginate(Array(29).fill(0)).map(p => p.length), [14, 14, 1]);
@@ -27,4 +27,10 @@ test('sem suporte ou com falha, baixa', async () => {
     assert.equal(await shareOrDownload(files, nav, f => got.push(f)), 'downloaded');
     assert.equal(got.length, 1);
   }
+});
+test('orienta postar pela galeria só quando a imagem foi baixada', () => {
+  assert.match(shareHint('downloaded'), /Instagram.*galeria/);
+  assert.match(shareHint('downloaded'), /segure na imagem/);
+  assert.equal(shareHint('shared'), 'No Instagram, escolha Stories.');
+  assert.equal(shareHint('cancelled'), '');
 });

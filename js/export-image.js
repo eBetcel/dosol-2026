@@ -38,6 +38,12 @@ export async function shareOrDownload(files, nav, download) {
   return 'downloaded';
 }
 
+export function shareHint(outcome) {
+  if (outcome === 'shared') return 'No Instagram, escolha Stories.';
+  if (outcome === 'downloaded') return 'Imagem baixada: abra o Instagram e poste nos stories pela galeria. Se não baixou, segure na imagem para salvar.';
+  return '';
+}
+
 const font = (weight, size, family) => `${weight} ${size}px ${family}`;
 
 function layoutRows(ctx, shows, conflicts, scale) {
