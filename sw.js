@@ -1,5 +1,6 @@
-// Rede primeiro, para a programação não ficar velha; cache só quando a rede falha.
+// Rede primeiro, para a programação não ficar velha; cache quando a rede falha ou demora.
 const CACHE = 'roteiro-dosol-v1';
+const TIMEOUT = 2500; // sinal fraco costuma travar em vez de falhar
 const FILES = [
   './', 'index.html',
   'css/theme.css', 'css/app.css',
@@ -11,26 +12,38 @@ const FILES = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
+  // um por um: uma falha no sinal ruim não descarta os outros arquivos
+  event.waitUntil(caches.open(CACHE).then(cache => Promise.allSettled(FILES.map(file => cache.add(file)))));
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', event => {
   const { request } = event;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
-  event.respondWith(networkFirst(request));
+  const network = fetchAndStore(request);
+  event.waitUntil(network); // resposta atrasada ainda atualiza o cache
+  event.respondWith(respond(request, network));
 });
 
-async function networkFirst(request) {
-  const cache = await caches.open(CACHE);
-  let response;
+async function fetchAndStore(request) {
   try {
-    response = await fetch(request, { cache: 'no-cache' });
+    const response = await fetch(request, { cache: 'no-cache' });
     if (response.ok) {
+      const cache = await caches.open(CACHE);
       await cache.put(request, response.clone()).catch(() => {});
-      return response;
     }
+    return response;
   } catch {
-    // sem rede
+    return null; // sem rede
   }
-  return (await cache.match(request, { ignoreSearch: true })) ?? response ?? Response.error();
+}
+
+async function respond(request, network) {
+  const first = await Promise.race([network, new Promise(resolve => setTimeout(resolve, TIMEOUT))]);
+  if (first?.ok) return first;
+  const cache = await caches.open(CACHE);
+  return (await cache.match(request, { ignoreSearch: true })) ?? (await network) ?? Response.error();
 }
