@@ -101,3 +101,7 @@ GitHub Pages. Criar repositório público e publicar só com confirmação expl�
 
 ## Prazo
 A sexta é o próprio dia 27/11, com o primeiro show às 19h. Plano curto e entrega direta.
+
+## Ajuste após publicação
+O rodapé da imagem traz "Monte o seu: ebetcel.github.io/dosol-2026" no lugar do aviso de app
+não oficial. O aviso continua no rodapé do site.

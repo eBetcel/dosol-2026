@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { paginate, wrapText, shareOrDownload, shareHint } from '../js/export-image.js';
+import { paginate, wrapText, shareOrDownload, shareHint, footerText } from '../js/export-image.js';
 
 test('pagina em blocos de 14', () => {
   assert.deepEqual(paginate(Array(29).fill(0)).map(p => p.length), [14, 14, 1]);
@@ -33,4 +33,8 @@ test('orienta postar pela galeria só quando a imagem foi baixada', () => {
   assert.match(shareHint('downloaded'), /segure na imagem/);
   assert.equal(shareHint('shared'), 'No Instagram, escolha Stories.');
   assert.equal(shareHint('cancelled'), '');
+});
+test('rodapé da imagem leva o link do app', () => {
+  assert.equal(footerText(1, 1), 'Monte o seu: ebetcel.github.io/dosol-2026');
+  assert.equal(footerText(2, 3), 'Monte o seu: ebetcel.github.io/dosol-2026 · 2/3');
 });

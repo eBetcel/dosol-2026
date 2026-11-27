@@ -9,6 +9,10 @@ const GAP = 14;
 const TEXT_X = 300;
 const TEXT_WIDTH = 700;
 
+export function footerText(page, total) {
+  return 'Monte o seu: ebetcel.github.io/dosol-2026' + (total > 1 ? ` · ${page}/${total}` : '');
+}
+
 export function paginate(shows, size = 14) {
   const pages = [];
   for (let i = 0; i < shows.length; i += size) pages.push(shows.slice(i, i + size));
@@ -139,7 +143,6 @@ export async function drawPage(day, shows, page, total, conflicts) {
     y += row.height + GAP;
   }
 
-  const footer = 'App não oficial, feito por fã' + (total > 1 ? ` · ${page}/${total}` : '');
-  text(footer, W / 2, 1828, font(500, 30, fonts.texto), colors.preto, 'center');
+  text(footerText(page, total), W / 2, 1830, font(800, 36, fonts.texto), colors.preto, 'center');
   return canvas;
 }
