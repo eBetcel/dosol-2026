@@ -3,7 +3,7 @@ import { showsOfDay, defaultDayId, findConflicts } from './schedule.js';
 import { createSelection } from './storage.js';
 import { renderTimeline, renderPlan } from './ui.js';
 import { createOrientation, renderHorizontalTimeline } from './ui-horizontal.js';
-import { paginate, drawPage, shareOrDownload, shareHint } from './export-image.js';
+import { paginate, drawPage, shareOrDownload, shareHint, createLatest } from './export-image.js';
 import { copyLink, inviteFriend, inviteHint } from './share-link.js';
 import { createHelp, goLabel } from './help.js';
 
@@ -13,16 +13,17 @@ const selection = createSelection(() => window.localStorage, validIds);
 
 const orientation = createOrientation(() => window.localStorage);
 const help = createHelp(() => window.localStorage);
+const latest = createLatest();
 let dayId = defaultDayId(new Date());
 let view = 'timeline';
 const day = () => DAYS.find(d => d.id === dayId);
 
 function renderSelectionState() {
   renderPlan($('#plan'), day(), selection);
-  $('#export').disabled = selection.ids().length === 0;
+  const count = selection.ids().length;
   if ($('#go')) {
-    $('#go').disabled = $('#export').disabled;
-    $('#go').textContent = goLabel(selection.ids().length);
+    $('#go').disabled = count === 0;
+    $('#go').textContent = goLabel(count);
   }
 }
 
@@ -44,6 +45,7 @@ function render() {
 }
 
 function clearImages() {
+  latest.cancel();
   for (const img of $('#preview').querySelectorAll('img')) URL.revokeObjectURL(img.src);
   $('#preview').replaceChildren();
 }
@@ -90,28 +92,32 @@ function imageCard(file) {
 
 async function generate() {
   clearImages();
-  $('#export').disabled = true;
+  if (selection.ids().length === 0) return;
+  const isCurrent = latest.start();
   try {
     const files = await createImages();
+    if (!isCurrent()) return;
     $('#preview').append(
       Object.assign(document.createElement('p'), { textContent: 'No menu que abrir, escolha Instagram → Stories. Ou segure na imagem para salvar.' }),
       ...files.map(imageCard));
   } catch {
-    $('#preview').textContent = 'Não foi possível gerar a imagem neste navegador.';
+    if (isCurrent()) $('#preview').textContent = 'Não foi possível gerar a imagem neste navegador.';
   }
-  $('#export').disabled = selection.ids().length === 0;
+}
+
+function showPlan() {
+  view = 'plan';
+  render();
+  generate();
 }
 
 $('#rotate')?.addEventListener('click', () => {
   orientation.toggle();
   render();
 });
-$('#export').addEventListener('click', generate);
 $('#go')?.addEventListener('click', () => {
-  view = 'plan';
-  render();
+  showPlan();
   window.scrollTo(0, 0);
-  generate();
 });
 
 $('#invite')?.addEventListener('click', async () => {
@@ -125,7 +131,11 @@ for (const d of DAYS) {
   $('#days').append(button);
 }
 for (const button of document.querySelectorAll('[data-view]')) {
-  button.addEventListener('click', () => { view = button.dataset.view; render(); });
+  button.addEventListener('click', () => {
+    if (button.dataset.view === 'plan') return showPlan();
+    view = button.dataset.view;
+    render();
+  });
 }
 render();
 

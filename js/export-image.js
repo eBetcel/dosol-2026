@@ -146,3 +146,15 @@ export async function drawPage(day, shows, page, total, conflicts) {
   text(footerText(page, total), W / 2, 1830, font(800, 36, fonts.texto), colors.preto, 'center');
   return canvas;
 }
+
+// Marca cada geração: toques repetidos ou mudança na seleção descartam as anteriores.
+export function createLatest() {
+  let current = 0;
+  return {
+    start() {
+      const mine = ++current;
+      return () => mine === current;
+    },
+    cancel() { current++; },
+  };
+}
