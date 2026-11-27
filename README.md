@@ -1,5 +1,7 @@
 # Meu roteiro · Festival DoSol 2026
 
+**Acesse:** https://ebetcel.github.io/dosol-2026/
+
 Timeline por palco da sexta (27/11) e do sábado (28/11) do Festival DoSol em Natal, com
 seleção de shows e exportação do roteiro como imagem.
 
