@@ -5,12 +5,14 @@ import { renderTimeline, renderPlan } from './ui.js';
 import { createOrientation, renderHorizontalTimeline } from './ui-horizontal.js';
 import { paginate, drawPage, shareOrDownload, shareHint } from './export-image.js';
 import { copyLink, inviteFriend, inviteHint } from './share-link.js';
+import { createHelp, goLabel } from './help.js';
 
 const $ = selector => document.querySelector(selector);
 const validIds = new Set(DAYS.flatMap(d => showsOfDay(d).map(s => s.id)));
 const selection = createSelection(() => window.localStorage, validIds);
 
 const orientation = createOrientation(() => window.localStorage);
+const help = createHelp(() => window.localStorage);
 let dayId = defaultDayId(new Date());
 let view = 'timeline';
 const day = () => DAYS.find(d => d.id === dayId);
@@ -18,7 +20,10 @@ const day = () => DAYS.find(d => d.id === dayId);
 function renderSelectionState() {
   renderPlan($('#plan'), day(), selection);
   $('#export').disabled = selection.ids().length === 0;
-  if ($('#go')) $('#go').disabled = $('#export').disabled;
+  if ($('#go')) {
+    $('#go').disabled = $('#export').disabled;
+    $('#go').textContent = goLabel(selection.ids().length);
+  }
 }
 
 function render() {
@@ -123,5 +128,16 @@ for (const button of document.querySelectorAll('[data-view]')) {
   button.addEventListener('click', () => { view = button.dataset.view; render(); });
 }
 render();
+
+const dialog = $('#help');
+if (dialog?.showModal) {
+  dialog.addEventListener('close', () => help.markSeen());
+  $('#help-open').addEventListener('click', () => dialog.showModal());
+  if (help.shouldOpen(selection.ids().length)) dialog.showModal();
+} else if (dialog) {
+  // navegador sem <dialog> (iOS antes do 15.4): fica só a dica no botão
+  dialog.hidden = true;
+  $('#help-open').hidden = true;
+}
 
 navigator.serviceWorker?.register('./sw.js').catch(() => {});

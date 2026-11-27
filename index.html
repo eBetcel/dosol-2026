@@ -18,6 +18,7 @@
   <link rel="modulepreload" href="js/theme.js">
   <link rel="modulepreload" href="js/share-link.js">
   <link rel="modulepreload" href="js/ui-horizontal.js">
+  <link rel="modulepreload" href="js/help.js">
   <script type="module" src="js/app.js"></script>
   <script data-goatcounter="https://dosol-2016.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -39,10 +40,11 @@
     </nav>
     <div class="abas" id="rotate-bar">
       <button type="button" id="rotate">⇆ Ver na horizontal</button>
+      <button type="button" id="help-open">? Como usar</button>
     </div>
     <section id="timeline" aria-label="Programação por palco"></section>
     <div class="acoes fixa" id="go-bar">
-      <button type="button" id="go" disabled>Gerar roteiro</button>
+      <button type="button" id="go" disabled>Toque nos shows para escolher</button>
     </div>
     <section id="plan-view" hidden>
       <div id="plan"></div>
@@ -56,6 +58,15 @@
       <p id="invite-hint" class="aviso" aria-live="polite"></p>
     </section>
   </main>
+  <dialog id="help" aria-labelledby="help-title">
+    <h2 id="help-title">Como montar seu roteiro</h2>
+    <ol>
+      <li><b>Toque nos shows</b> que você quer ver. Eles ficam marcados.</li>
+      <li>Toque em <b>Gerar roteiro</b>.</li>
+      <li><b>Compartilhe</b> ou salve a imagem.</li>
+    </ol>
+    <form method="dialog"><button>Entendi</button></form>
+  </dialog>
   <footer>
     <img src="assets/cogumelo.svg" alt="">
     <p>App não oficial, feito por fã. Horários atualizados em 27/11, podem diferir do post e mudar. No Frisson, a duração é estimada. Contamos os acessos de forma anônima, sem cookies.</p>

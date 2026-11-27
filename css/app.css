@@ -15,6 +15,7 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 .abas { display: flex; gap: 8px; margin-bottom: 8px; }
 .abas button { flex: 1; min-height: 44px; font-weight: 800; background: var(--creme-claro); border: 2px solid var(--preto); border-radius: 8px; }
 .abas button[aria-pressed='true'] { background: var(--preto); color: var(--creme-claro); }
+#rotate-bar button { font-size: .85rem; }
 
 .timeline { overflow: auto; max-height: calc(100vh - 270px); max-height: calc(100dvh - 270px); min-height: 280px; border: 2px solid var(--preto); border-radius: 8px; background: var(--creme-claro); }
 .grade { display: grid; grid-template-columns: 52px repeat(var(--colunas), minmax(0, 1fr)); min-width: calc(52px + var(--colunas) * 150px); }
@@ -49,6 +50,13 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 #preview figure { display: grid; gap: 8px; justify-items: center; width: 100%; max-width: 360px; }
 #preview button { width: 100%; }
 #preview img { width: 100%; max-width: 360px; height: auto; border: 2px solid var(--preto); }
+
+#help { margin: auto; width: min(360px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 20px; color: var(--preto); background: var(--creme-claro); border: 3px solid var(--preto); border-radius: 12px; }
+#help::backdrop { background: #151012b3; }
+#help h2 { font: 400 1.3rem/1.2 var(--fonte-titulo); color: var(--vermelho-escuro); text-align: center; }
+#help ol { display: grid; gap: 12px; margin: 16px 0 20px; padding-left: 22px; font-size: 1rem; }
+#help b { font-weight: 800; }
+#help button { width: 100%; min-height: 48px; font-weight: 800; background: var(--vermelho); border: 2px solid var(--preto); border-radius: 8px; }
 
 footer { text-align: center; padding: 20px 16px; font-size: .8rem; }
 footer img { width: 40px; height: 40px; }
