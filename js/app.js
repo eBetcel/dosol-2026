@@ -87,3 +87,5 @@ for (const button of document.querySelectorAll('[data-view]')) {
   button.addEventListener('click', () => { view = button.dataset.view; render(); });
 }
 render();
+
+navigator.serviceWorker?.register('./sw.js').catch(() => {});
