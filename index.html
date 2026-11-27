@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meu roteiro · Festival DoSol 2026</title>
+  <meta name="description" content="Monte seu roteiro de shows do Festival DoSol 2026 em Natal. App não oficial.">
+  <meta name="theme-color" content="#151012">
+  <link rel="icon" href="assets/rosa.svg">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div class="borda"></div>
+  <header>
+    <img src="assets/rosa.svg" alt="">
+    <div>
+      <h1>Meu roteiro · Festival DoSol 2026</h1>
+      <p>Natal · Rua Chile</p>
+    </div>
+    <img src="assets/lua.svg" alt="">
+  </header>
+  <main>
+    <nav class="abas" id="days" aria-label="Dia"></nav>
+    <nav class="abas" aria-label="Visão">
+      <button type="button" data-view="timeline">Programação</button>
+      <button type="button" data-view="plan">Meu roteiro</button>
+    </nav>
+    <section id="timeline" aria-label="Programação por palco"></section>
+    <section id="plan-view" hidden>
+      <div id="plan"></div>
+      <div class="acoes">
+        <button type="button" id="export" disabled>Gerar imagem</button>
+        <button type="button" id="share" hidden>Compartilhar</button>
+      </div>
+      <div id="preview" aria-live="polite"></div>
+    </section>
+  </main>
+  <footer>
+    <img src="assets/cogumelo.svg" alt="">
+    <p>App não oficial, feito por fã. Os horários podem mudar; durações e choques são estimativas.</p>
+    <p><a href="https://www.instagram.com/p/Df2ux8vH8Mr/" target="_blank" rel="noopener">Ver a programação no post original</a></p>
+  </footer>
+  <div class="borda base"></div>
+</body>
+</html>
