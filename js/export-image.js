@@ -60,7 +60,7 @@ function layoutRows(ctx, shows, conflicts, scale) {
   const stageFont = font(500, 28 * scale, texto);
   return shows.map(show => {
     const artist = wrap(show.artist, artistFont);
-    const stage = wrap(show.stageName + (conflicts.has(show.id) ? ' · pode chocar (estimativa)' : ''), stageFont);
+    const stage = wrap(show.stageName + (conflicts.has(show.id) ? ' · pode chocar' : ''), stageFont);
     const height = (artist.length * 44 + stage.length * 34 + 30) * scale;
     return { show, artist, stage, artistFont, stageFont, height };
   });

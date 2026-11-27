@@ -115,3 +115,8 @@ de convite fica só em "Meu roteiro".
 
 Um botão na aba Programação alterna a timeline entre vertical (padrão) e horizontal, com os
 palcos em linhas. A escolha fica salva no aparelho.
+
+## Correção de horários (27/11)
+Uma planilha de horários passa a prevalecer sobre o post: início e fim de cada show; no Anexo
+de sábado, Catiça às 23h00 e Dirty Grills às 01h20; Pense às 00h50. O Frisson não consta nela e
+segue o post, com 120 min estimados. A duração estimada de 40 min deixa de existir.

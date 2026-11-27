@@ -1,7 +1,6 @@
 const DAY_MINUTES = 24 * 60;
 const NIGHT_ENDS = 6 * 60;
-const DURATION = 40;
-const STAGE_DURATION = { frisson: 120 };
+const ESTIMATED_DURATION = 120; // sets do Frisson, sem horário de fim
 
 export function toMinutes(time) {
   const [h, m] = time.split(':').map(Number);
@@ -23,7 +22,7 @@ export function showsOfDay(day) {
         stageId: stage.id,
         stageName: stage.name,
         start,
-        end: start + (STAGE_DURATION[stage.id] ?? DURATION),
+        end: show.endTime ? toMinutes(show.endTime) : start + ESTIMATED_DURATION,
       };
     }))
     .sort((a, b) => a.start - b.start); // sort estável mantém a ordem dos palcos

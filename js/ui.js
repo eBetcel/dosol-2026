@@ -69,7 +69,7 @@ export function renderPlan(container, day, selection) {
     const item = color(el('li', {},
       el('b', { textContent: `${formatTime(show.time)} → vá para o ${show.stageName}` }),
       el('span', { className: 'artista', textContent: show.artist })), show.stageId);
-    if (conflicts.has(show.id)) item.append(el('span', { className: 'selo', textContent: 'pode chocar (estimativa)' }));
+    if (conflicts.has(show.id)) item.append(el('span', { className: 'selo', textContent: 'pode chocar' }));
     return item;
   })));
 }

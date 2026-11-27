@@ -15,13 +15,15 @@ ainda será pedida à organização.
 
 ## Atualizar a programação
 
-Edite `js/data.js`. A fonte da verdade é o [post oficial](https://www.instagram.com/p/Df2ux8vH8Mr/);
-os horários vêm dos slides. Ao criar um arquivo novo, inclua-o na lista de `sw.js`.
+Edite `js/data.js`. A programação vem do [post oficial](https://www.instagram.com/p/Df2ux8vH8Mr/),
+com os horários de início e fim corrigidos por uma planilha recebida em 27/11. Ao mudar o horário
+de um show, mantenha o id antigo (4º item), para não trocar a seleção de quem já marcou.
+Ao criar um arquivo novo, inclua-o na lista de `sw.js`.
 
 Divergência conhecida no Palco Frisson: o slide lista Marti, Lily, Jennify C. e Hunter; a
 legenda lista Marti, Dandarona (PE), Hunter B2B Lyli e Jennify C. O app segue o slide.
 
-Durações são estimadas (40 min; 120 min no Frisson).
+O Frisson não tem horário de fim: a duração é estimada em 120 min.
 
 ## Publicar no GitHub Pages
 
