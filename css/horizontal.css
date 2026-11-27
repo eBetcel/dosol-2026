@@ -1,0 +1,9 @@
+/* Teste: timeline horizontal (?linha=horizontal). */
+.h-grade { display: grid; grid-template-columns: 92px var(--largura); width: max-content; }
+.h-canto, .h-horas { position: sticky; top: 0; height: 30px; background: var(--preto); color: var(--creme-claro); }
+.h-canto { left: 0; z-index: 4; }
+.h-horas { z-index: 2; }
+.h-horas span { position: absolute; top: 6px; padding-left: 4px; font-weight: 800; font-size: .75rem; }
+.h-palco { position: sticky; left: 0; z-index: 3; display: flex; align-items: center; padding: 6px; font: 800 .72rem/1.2 var(--fonte-texto); background: var(--preto); color: var(--creme-claro); border-left: 6px solid var(--cor); border-bottom: 1px solid #f6eadf55; }
+.h-faixa { position: relative; min-height: 116px; border-bottom: 1px dashed #15101255; background: repeating-linear-gradient(90deg, #15101222 0 1px, transparent 1px var(--hora)); }
+.h-faixa .show { top: 4px; bottom: 4px; right: auto; justify-content: flex-start; }

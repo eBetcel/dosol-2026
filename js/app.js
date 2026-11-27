@@ -2,6 +2,7 @@ import { DAYS } from './data.js';
 import { showsOfDay, defaultDayId, findConflicts } from './schedule.js';
 import { createSelection } from './storage.js';
 import { renderTimeline, renderPlan } from './ui.js';
+import { isHorizontal, renderHorizontalTimeline } from './ui-horizontal.js';
 import { paginate, drawPage, shareOrDownload, shareHint } from './export-image.js';
 import { copyLink, inviteFriend, inviteHint } from './share-link.js';
 
@@ -9,6 +10,7 @@ const $ = selector => document.querySelector(selector);
 const validIds = new Set(DAYS.flatMap(d => showsOfDay(d).map(s => s.id)));
 const selection = createSelection(() => window.localStorage, validIds);
 
+const drawTimeline = isHorizontal(location.search) ? renderHorizontalTimeline : renderTimeline;
 let dayId = defaultDayId(new Date());
 let view = 'timeline';
 const day = () => DAYS.find(d => d.id === dayId);
@@ -25,7 +27,7 @@ function render() {
   $('#timeline').hidden = view !== 'timeline';
   if ($('#go-bar')) $('#go-bar').hidden = view !== 'timeline';
   $('#plan-view').hidden = view !== 'plan';
-  renderTimeline($('#timeline'), day(), selection, id => {
+  drawTimeline($('#timeline'), day(), selection, id => {
     selection.toggle(id);
     clearImages();
     renderSelectionState();
