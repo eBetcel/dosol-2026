@@ -105,3 +105,7 @@ A sexta é o próprio dia 27/11, com o primeiro show às 19h. Plano curto e entr
 ## Ajuste após publicação
 O rodapé da imagem traz "Monte o seu: ebetcel.github.io/dosol-2026" no lugar do aviso de app
 não oficial. O aviso continua no rodapé do site.
+
+Para a pessoa encaminhar o app: o botão "Convidar para montar o seu" envia texto e link pelo
+menu do aparelho (ou copia o convite); ao tocar em "Compartilhar" numa imagem, o link do app é
+copiado para colar no adesivo de link dos stories.

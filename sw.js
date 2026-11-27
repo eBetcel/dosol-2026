@@ -4,7 +4,7 @@ const TIMEOUT = 2500; // sinal fraco costuma travar em vez de falhar
 const FILES = [
   './', 'index.html',
   'css/theme.css', 'css/app.css',
-  'js/app.js', 'js/data.js', 'js/schedule.js', 'js/storage.js', 'js/ui.js', 'js/export-image.js', 'js/theme.js',
+  'js/app.js', 'js/data.js', 'js/schedule.js', 'js/storage.js', 'js/ui.js', 'js/export-image.js', 'js/theme.js', 'js/share-link.js',
   'assets/borda.svg', 'assets/rosa.svg', 'assets/lua.svg', 'assets/cogumelo.svg',
   'assets/fonts/alfa-slab-one-latin-400-normal.woff2',
   'assets/fonts/archivo-latin-500-normal.woff2',

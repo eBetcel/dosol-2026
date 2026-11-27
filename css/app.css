@@ -42,6 +42,7 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 .acoes { display: flex; gap: 8px; margin: 16px 0; }
 .acoes button, #preview button { flex: 1; min-height: 48px; font-weight: 800; background: var(--vermelho); border: 2px solid var(--preto); border-radius: 8px; }
 .acoes button:disabled { opacity: .45; cursor: default; }
+.aviso { text-align: center; overflow-wrap: anywhere; }
 #preview { display: grid; gap: 12px; justify-items: center; text-align: center; }
 #preview figure { display: grid; gap: 8px; justify-items: center; width: 100%; max-width: 360px; }
 #preview button { width: 100%; }

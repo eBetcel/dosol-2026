@@ -3,6 +3,7 @@ import { showsOfDay, defaultDayId, findConflicts } from './schedule.js';
 import { createSelection } from './storage.js';
 import { renderTimeline, renderPlan } from './ui.js';
 import { paginate, drawPage, shareOrDownload, shareHint } from './export-image.js';
+import { copyLink, inviteFriend, inviteHint } from './share-link.js';
 
 const $ = selector => document.querySelector(selector);
 const validIds = new Set(DAYS.flatMap(d => showsOfDay(d).map(s => s.id)));
@@ -60,13 +61,18 @@ function download(file) {
 function imageCard(file) {
   const img = Object.assign(document.createElement('img'), { src: URL.createObjectURL(file), alt: 'Imagem do seu roteiro' });
   const button = Object.assign(document.createElement('button'), { type: 'button', textContent: 'Compartilhar' });
+  const linkHint = document.createElement('p');
   const hint = document.createElement('p');
   // share precisa ser chamado direto no toque (iOS); uma imagem por vez para os stories
   button.addEventListener('click', async () => {
+    // copia antes de abrir o menu, sem esperar: o share precisa do mesmo toque
+    copyLink(navigator).then(copied => {
+      linkHint.textContent = copied ? 'Link copiado: no Stories, use o adesivo de link e cole.' : '';
+    });
     hint.textContent = shareHint(await shareOrDownload([file], navigator, download));
   });
   const card = document.createElement('figure');
-  card.append(img, button, hint);
+  card.append(img, button, linkHint, hint);
   return card;
 }
 
@@ -82,6 +88,10 @@ $('#export').addEventListener('click', async () => {
     $('#preview').textContent = 'Não foi possível gerar a imagem neste navegador.';
   }
   $('#export').disabled = selection.ids().length === 0;
+});
+
+$('#invite')?.addEventListener('click', async () => {
+  $('#invite-hint').textContent = inviteHint(await inviteFriend(navigator));
 });
 
 for (const d of DAYS) {
