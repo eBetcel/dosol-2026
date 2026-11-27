@@ -16,7 +16,7 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 .abas button { flex: 1; min-height: 44px; font-weight: 800; background: var(--creme-claro); border: 2px solid var(--preto); border-radius: 8px; }
 .abas button[aria-pressed='true'] { background: var(--preto); color: var(--creme-claro); }
 
-.timeline { overflow: auto; max-height: calc(100vh - 220px); max-height: calc(100dvh - 220px); border: 2px solid var(--preto); border-radius: 8px; background: var(--creme-claro); }
+.timeline { overflow: auto; max-height: calc(100vh - 270px); max-height: calc(100dvh - 270px); min-height: 280px; border: 2px solid var(--preto); border-radius: 8px; background: var(--creme-claro); }
 .grade { display: grid; grid-template-columns: 52px repeat(var(--colunas), minmax(0, 1fr)); min-width: calc(52px + var(--colunas) * 150px); }
 .canto, .palco { position: sticky; top: 0; background: var(--preto); color: var(--creme-claro); }
 .canto { left: 0; z-index: 4; }

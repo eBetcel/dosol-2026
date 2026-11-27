@@ -2,7 +2,7 @@ import { DAYS } from './data.js';
 import { showsOfDay, defaultDayId, findConflicts } from './schedule.js';
 import { createSelection } from './storage.js';
 import { renderTimeline, renderPlan } from './ui.js';
-import { isHorizontal, renderHorizontalTimeline } from './ui-horizontal.js';
+import { createOrientation, renderHorizontalTimeline } from './ui-horizontal.js';
 import { paginate, drawPage, shareOrDownload, shareHint } from './export-image.js';
 import { copyLink, inviteFriend, inviteHint } from './share-link.js';
 
@@ -10,7 +10,7 @@ const $ = selector => document.querySelector(selector);
 const validIds = new Set(DAYS.flatMap(d => showsOfDay(d).map(s => s.id)));
 const selection = createSelection(() => window.localStorage, validIds);
 
-const drawTimeline = isHorizontal(location.search) ? renderHorizontalTimeline : renderTimeline;
+const orientation = createOrientation(() => window.localStorage);
 let dayId = defaultDayId(new Date());
 let view = 'timeline';
 const day = () => DAYS.find(d => d.id === dayId);
@@ -27,6 +27,9 @@ function render() {
   $('#timeline').hidden = view !== 'timeline';
   if ($('#go-bar')) $('#go-bar').hidden = view !== 'timeline';
   $('#plan-view').hidden = view !== 'plan';
+  if ($('#rotate-bar')) $('#rotate-bar').hidden = view !== 'timeline';
+  if ($('#rotate')) $('#rotate').textContent = orientation.isHorizontal() ? '⇅ Ver na vertical' : '⇆ Ver na horizontal';
+  const drawTimeline = orientation.isHorizontal() ? renderHorizontalTimeline : renderTimeline;
   drawTimeline($('#timeline'), day(), selection, id => {
     selection.toggle(id);
     clearImages();
@@ -94,6 +97,10 @@ async function generate() {
   $('#export').disabled = selection.ids().length === 0;
 }
 
+$('#rotate')?.addEventListener('click', () => {
+  orientation.toggle();
+  render();
+});
 $('#export').addEventListener('click', generate);
 $('#go')?.addEventListener('click', () => {
   view = 'plan';

@@ -112,3 +112,6 @@ copiado para colar no adesivo de link dos stories.
 
 Na aba Programação, o botão "Gerar roteiro" leva a "Meu roteiro" e já gera as imagens. O botão
 de convite fica só em "Meu roteiro".
+
+Um botão na aba Programação alterna a timeline entre vertical (padrão) e horizontal, com os
+palcos em linhas. A escolha fica salva no aparelho.

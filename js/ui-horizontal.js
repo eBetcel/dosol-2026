@@ -1,10 +1,28 @@
-// Teste: timeline com os palcos em linhas. Ativa com ?linha=horizontal.
+// Timeline com os palcos em linhas, alternativa à vertical (padrão).
 import { showsOfDay, formatTime } from './schedule.js';
 
 const PX_PER_MIN = 4.4;
 
-export function isHorizontal(search) {
-  return new URLSearchParams(search).get('linha') === 'horizontal';
+const KEY = 'roteiro-dosol-2026-linha';
+
+export function createOrientation(getStorage) {
+  let horizontal = false;
+  try {
+    horizontal = getStorage().getItem(KEY) === 'horizontal';
+  } catch {
+    // armazenamento bloqueado: começa na vertical
+  }
+  return {
+    isHorizontal: () => horizontal,
+    toggle() {
+      horizontal = !horizontal;
+      try {
+        getStorage().setItem(KEY, horizontal ? 'horizontal' : 'vertical');
+      } catch {
+        // vale só nesta visita
+      }
+    },
+  };
 }
 
 export function timelineRange(shows) {

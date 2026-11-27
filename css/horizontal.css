@@ -1,4 +1,4 @@
-/* Teste: timeline horizontal (?linha=horizontal). */
+/* Timeline horizontal (botão "Ver na horizontal"). */
 .h-grade { display: grid; grid-template-columns: 92px var(--largura); width: max-content; }
 .h-canto, .h-horas { position: sticky; top: 0; height: 30px; background: var(--preto); color: var(--creme-claro); }
 .h-canto { left: 0; z-index: 4; }
