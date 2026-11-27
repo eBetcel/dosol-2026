@@ -59,7 +59,7 @@ function download(file) {
 
 function imageCard(file) {
   const img = Object.assign(document.createElement('img'), { src: URL.createObjectURL(file), alt: 'Imagem do seu roteiro' });
-  const button = Object.assign(document.createElement('button'), { type: 'button', textContent: 'Compartilhar no Instagram' });
+  const button = Object.assign(document.createElement('button'), { type: 'button', textContent: 'Compartilhar' });
   const hint = document.createElement('p');
   // share precisa ser chamado direto no toque (iOS); uma imagem por vez para os stories
   button.addEventListener('click', async () => {
