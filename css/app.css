@@ -16,7 +16,7 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 .abas button { flex: 1; min-height: 44px; font-weight: 800; background: var(--creme-claro); border: 2px solid var(--preto); border-radius: 8px; }
 .abas button[aria-pressed='true'] { background: var(--preto); color: var(--creme-claro); }
 
-.timeline { overflow: auto; max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); border: 2px solid var(--preto); border-radius: 8px; background: var(--creme-claro); }
+.timeline { overflow: auto; max-height: calc(100vh - 220px); max-height: calc(100dvh - 220px); border: 2px solid var(--preto); border-radius: 8px; background: var(--creme-claro); }
 .grade { display: grid; grid-template-columns: 52px repeat(var(--colunas), minmax(0, 1fr)); min-width: calc(52px + var(--colunas) * 150px); }
 .canto, .palco { position: sticky; top: 0; background: var(--preto); color: var(--creme-claro); }
 .canto { left: 0; z-index: 4; }
@@ -42,6 +42,8 @@ main { max-width: 960px; margin: 0 auto; padding: 0 8px; }
 .acoes { display: flex; gap: 8px; margin: 16px 0; }
 .acoes button, #preview button { flex: 1; min-height: 48px; font-weight: 800; background: var(--vermelho); border: 2px solid var(--preto); border-radius: 8px; }
 .acoes button:disabled { opacity: .45; cursor: default; }
+.fixa { position: sticky; bottom: 8px; z-index: 5; }
+.acoes.fixa button:disabled { opacity: 1; background: var(--creme-claro); color: #6b5d58; }
 .aviso { text-align: center; overflow-wrap: anywhere; }
 #preview { display: grid; gap: 12px; justify-items: center; text-align: center; }
 #preview figure { display: grid; gap: 8px; justify-items: center; width: 100%; max-width: 360px; }

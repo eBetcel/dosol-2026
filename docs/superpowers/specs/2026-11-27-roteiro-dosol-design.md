@@ -109,3 +109,6 @@ não oficial. O aviso continua no rodapé do site.
 Para a pessoa encaminhar o app: o botão "Convidar para montar o seu" envia texto e link pelo
 menu do aparelho (ou copia o convite); ao tocar em "Compartilhar" numa imagem, o link do app é
 copiado para colar no adesivo de link dos stories.
+
+Na aba Programação, o botão "Gerar roteiro" leva a "Meu roteiro" e já gera as imagens. O botão
+de convite fica só em "Meu roteiro".

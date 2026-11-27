@@ -16,12 +16,14 @@ const day = () => DAYS.find(d => d.id === dayId);
 function renderSelectionState() {
   renderPlan($('#plan'), day(), selection);
   $('#export').disabled = selection.ids().length === 0;
+  if ($('#go')) $('#go').disabled = $('#export').disabled;
 }
 
 function render() {
   for (const b of $('#days').children) b.setAttribute('aria-pressed', b.dataset.day === dayId);
   for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-pressed', b.dataset.view === view);
   $('#timeline').hidden = view !== 'timeline';
+  if ($('#go-bar')) $('#go-bar').hidden = view !== 'timeline';
   $('#plan-view').hidden = view !== 'plan';
   renderTimeline($('#timeline'), day(), selection, id => {
     selection.toggle(id);
@@ -76,7 +78,7 @@ function imageCard(file) {
   return card;
 }
 
-$('#export').addEventListener('click', async () => {
+async function generate() {
   clearImages();
   $('#export').disabled = true;
   try {
@@ -88,6 +90,14 @@ $('#export').addEventListener('click', async () => {
     $('#preview').textContent = 'Não foi possível gerar a imagem neste navegador.';
   }
   $('#export').disabled = selection.ids().length === 0;
+}
+
+$('#export').addEventListener('click', generate);
+$('#go')?.addEventListener('click', () => {
+  view = 'plan';
+  render();
+  window.scrollTo(0, 0);
+  generate();
 });
 
 $('#invite')?.addEventListener('click', async () => {

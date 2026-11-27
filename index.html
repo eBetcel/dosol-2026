@@ -35,17 +35,20 @@
       <button type="button" data-view="plan">Meu roteiro</button>
     </nav>
     <section id="timeline" aria-label="Programação por palco"></section>
+    <div class="acoes fixa" id="go-bar">
+      <button type="button" id="go" disabled>Gerar roteiro</button>
+    </div>
     <section id="plan-view" hidden>
       <div id="plan"></div>
       <div class="acoes">
         <button type="button" id="export" disabled>Gerar imagem</button>
       </div>
       <div id="preview" aria-live="polite"></div>
+      <div class="acoes">
+        <button type="button" id="invite">Convidar para montar o seu</button>
+      </div>
+      <p id="invite-hint" class="aviso" aria-live="polite"></p>
     </section>
-    <div class="acoes">
-      <button type="button" id="invite">Convidar para montar o seu</button>
-    </div>
-    <p id="invite-hint" class="aviso" aria-live="polite"></p>
   </main>
   <footer>
     <img src="assets/cogumelo.svg" alt="">
